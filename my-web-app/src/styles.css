@@ -1601,4 +1601,8 @@ p.form-message.error {
   color: #fc924b;
   cursor: pointer; }
 
+.footer-copyright {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */

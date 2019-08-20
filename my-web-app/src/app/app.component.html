@@ -44,17 +44,19 @@
     </div> <!-- row -->
   </div> <!-- container -->
 </header>
-
 <!--====== HEADER PART ENDS ======-->
 
-<app-welcome-page></app-welcome-page>
-<app-research></app-research>
-<app-coding></app-coding>
-<app-new-ideas></app-new-ideas>
-<app-poetry></app-poetry>
-<app-life-experiences></app-life-experiences>
-<app-contact></app-contact>
+<main id="content">
+  <app-welcome-page></app-welcome-page>
+  <app-research></app-research>
+  <app-coding></app-coding>
+  <app-new-ideas></app-new-ideas>
+  <app-poetry></app-poetry>
+  <app-life-experiences></app-life-experiences>
+  <app-contact></app-contact>
+</main>
 
+<!--====== FOOTER PART START ======-->
 <section id="footer" class="footer-area">
   <div class="container">
     <div class="footer-widget pt-75 pb-120">
@@ -142,5 +144,12 @@
     </div> <!--  footer copyright -->
   </div> <!-- container -->
 </section>
+<!--====== FOOTER PART ENDS ======-->
+
+<!--====== BACK TO TOP PART START ======-->
+
+<a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+
+<!--====== BACK TO TOP PART ENDS ======-->
 
 <router-outlet></router-outlet>

@@ -1,0 +1,13 @@
+body{
+    background: #cce5ff;
+    color: #6f42c1;
+}
+
+a{
+    color: red;
+}
+
+h1{
+    font-family: "Ubuntu Mono";
+    font-size: medium;
+}

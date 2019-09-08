@@ -5,9 +5,25 @@ body{
 
 a{
     color: red;
+    text-decoration: none;
+}
+
+a:hover {
+    color: yellowgreen;
 }
 
 h1{
     font-family: "Ubuntu Mono";
     font-size: medium;
+}
+
+.logo{
+    visibility: hidden;
+}
+
+@media (min-width: 1000px){
+    .logo{
+        visibility: visible;
+    }
+
 }

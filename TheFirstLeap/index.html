@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>The First Leap</title>
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css"
 </head>
 <body>
 <a class="logo" href="index.html">
@@ -14,17 +15,23 @@
 &nbsp;
 <a href="idea-dashboard.html">Ideas</a>
 <hr>
-<h1>This is the Main Dashboard</h1>
+<div class="container">
+    <div class="row">
+<h1 class="col-md-4"> This is the Main Dashboard</h1>
 
-<p>A brief introduction here</p>
+<p class="col-md-8 thin-border">A brief introduction here</p>
+    </div>
+    <div class="row">
 <dl>
-    <dt>First Example</dt>
+    <dt class="col-md-6">First Example</dt>
     <dd>First Description: <a href="#">Show</a></dd>
 
-    <dt>Second Example</dt>
+    <dt class="col-lg-6">Second Example</dt>
     <dd><span class="logo"> Second </span> Description: <a href="#">Show</a></dd>
 
 </dl>
+    </div>
+</div>
 
 </body>
 </html>

@@ -13,12 +13,17 @@ a:hover {
 }
 
 h1{
+    background: red;
     font-family: "Ubuntu Mono";
     font-size: medium;
 }
 
 .logo{
     visibility: hidden;
+}
+/** black border */
+.thin-border {
+    border: 1px solid black;
 }
 
 @media (min-width: 1000px){

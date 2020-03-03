@@ -1,0 +1,420 @@
+python kgcvae_swda.py
+instance(KgCVAEConfig):
+  backward_size: 10,
+  batch_size: 30,
+  cell_type: 'gru',
+  cxt_cell_size: 600,
+  da_embed_size: 30,
+  dec_cell_size: 400,
+  dec_keep_prob: 1.0,
+  description: None,
+  early_stop: True,
+  embed_size: 200,
+  full_kl_step: 10000,
+  grad_clip: 5.0,
+  grad_noise: 0.0,
+  improve_threshold: 0.996,
+  init_lr: 0.001,
+  init_w: 0.08,
+  keep_prob: 1.0,
+  latent_size: 200,
+  lr_decay: 0.6,
+  lr_hold: 1,
+  max_epoch: 60,
+  max_utt_len: 40,
+  num_layer: 1,
+  op: 'adam',
+  patient_increase: 2.0,
+  sent_cell_size: 300,
+  sent_type: 'bi_rnn',
+  step_size: 1,
+  topic_embed_size: 30,
+  update_limit: 3000,
+  use_hcf: True
+Max utt len 96, mean utt len 14.69
+Max utt len 75, mean utt len 15.06
+Max utt len 74, mean utt len 15.39
+Load corpus with train size 3, valid size 3, test size 3 raw vocab size 24497 vocab size 10000 at cut_off 4 OOV rate 0.008035
+<d> index 143
+<sil> index -1
+67 topics in train data
+['statement-non-opinion', 'acknowledge_(backchannel)', 'statement-opinion', 'abandoned_or_turn-exit/uninterpretable', 'yes-no-question', 'agree/accept', 'appreciation', 'wh-question', 'backchannel_in_question_form', 'yes_answers', 'conventional-closing', 'response_acknowledgement', 'open-question', 'no_answers', 'affirmative_non-yes_answers', 'declarative_yes-no-question', 'summarize/reformulate', 'other', 'action-directive', 'rhetorical-questions', 'conventional-opening', 'collaborative_completion', 'signal-non-understanding', 'or-clause', 'hold_before_answer/agreement', 'quotation', 'negative_non-no_answers', 'self-talk', 'apology', 'dispreferred_answers', 'offers,_options_commits', 'other_answers', 'reject', 'repeat-phrase', 'non-verbal', 'declarative_wh-question', 'thanking', 'hedge', 'maybe/accept-part', '3rd-party-talk', 'downplayer', 'tag-question']
+42 dialog acts in train data
+Done loading corpus
+Max len 265 and min len 10 and avg len 90.737910
+Max len 191 and min len 34 and avg len 88.083333
+Max len 207 and min len 14 and avg len 90.403226
+2020-03-02 23:32:42.089221: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2020-03-02 23:32:42.089267: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2020-03-02 23:32:42.089275: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2020-03-02 23:32:42.089282: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+Use Adam
+Trainable model/topicEmbedding/embedding:0 with 2010 parameters
+Trainable model/dialogActEmbedding/embedding:0 with 1260 parameters
+Trainable model/wordEmbedding/embedding:0 with 2000400 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/fw/gru_cell/gates/kernel:0 with 300000 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/fw/gru_cell/gates/bias:0 with 600 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/fw/gru_cell/candidate/kernel:0 with 150000 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/fw/gru_cell/candidate/bias:0 with 300 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/bw/gru_cell/gates/kernel:0 with 300000 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/bw/gru_cell/gates/bias:0 with 600 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/bw/gru_cell/candidate/kernel:0 with 150000 parameters
+Trainable model/wordEmbedding/sent_bi_rnn/bidirectional_rnn/bw/gru_cell/candidate/bias:0 with 300 parameters
+Trainable model/contextRNN/rnn/gru_cell/gates/kernel:0 with 1442400 parameters
+Trainable model/contextRNN/rnn/gru_cell/gates/bias:0 with 1200 parameters
+Trainable model/contextRNN/rnn/gru_cell/candidate/kernel:0 with 721200 parameters
+Trainable model/contextRNN/rnn/gru_cell/candidate/bias:0 with 600 parameters
+Trainable model/attribute_fc1/weights:0 with 900 parameters
+Trainable model/attribute_fc1/biases:0 with 30 parameters
+Trainable model/recognitionNetwork/muvar/weights:0 with 507200 parameters
+Trainable model/recognitionNetwork/muvar/biases:0 with 400 parameters
+Trainable model/priorNetwork/fc1/weights:0 with 255200 parameters
+Trainable model/priorNetwork/fc1/biases:0 with 400 parameters
+Trainable model/priorNetwork/muvar/weights:0 with 160000 parameters
+Trainable model/priorNetwork/muvar/biases:0 with 400 parameters
+Trainable model/generationNetwork/bow_fc1/weights:0 with 335200 parameters
+Trainable model/generationNetwork/bow_fc1/biases:0 with 400 parameters
+Trainable model/generationNetwork/bow_project/weights:0 with 4000800 parameters
+Trainable model/generationNetwork/bow_project/biases:0 with 10002 parameters
+Trainable model/generationNetwork/meta_fc1/weights:0 with 335200 parameters
+Trainable model/generationNetwork/meta_fc1/biases:0 with 400 parameters
+Trainable model/generationNetwork/da_project/weights:0 with 16800 parameters
+Trainable model/generationNetwork/da_project/biases:0 with 42 parameters
+Trainable model/generationNetwork/init_state/weights:0 with 347200 parameters
+Trainable model/generationNetwork/init_state/biases:0 with 400 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/gru_cell/gates/kernel:0 with 504000 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/gru_cell/gates/bias:0 with 800 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/gru_cell/candidate/kernel:0 with 252000 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/gru_cell/candidate/bias:0 with 400 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/kernel:0 with 4000800 parameters
+Trainable model/decoder/rnn/output_projection_wrapper/bias:0 with 10002 parameters
+Total number of trainable parameters is 15809846
+Save summary to working/run1583191962
+Created computation graphs
+Created models with fresh parameters.
+>> Epoch 0 with lr 0.001000
+Train begins with 6864 batches with 6 left over samples
+0.10 elbo_loss 61.480343 bow_loss 73.092812 rc_loss 60.240318 rc_peplexity 167.237183 kl_loss 40.253540 kl_w 0.068700
+0.20 elbo_loss 57.686066 bow_loss 71.236275 rc_loss 55.326092 rc_peplexity 103.017914 kl_loss 37.109516 kl_w 0.137300
+0.30 elbo_loss 53.941883 bow_loss 67.671051 rc_loss 50.674526 rc_peplexity 77.269516 kl_loss 34.647457 kl_w 0.205900
+0.40 elbo_loss 53.318310 bow_loss 67.391098 rc_loss 49.201561 rc_peplexity 64.137718 kl_loss 32.929253 kl_w 0.274500
+Epoch Done elbo_loss 53.010406 bow_loss 67.114929 rc_loss 48.601761 rc_peplexity 60.525116 kl_loss 32.358604 step time 2.0334
+Valid begins with 41 batches with 0 left over samples
+ELBO_VALID elbo_loss 69.758194 bow_loss 65.719276 rc_loss 43.122398 rc_peplexity 21.546293 kl_loss 26.635799 
+Test begins with 5481 batches with 0 left over samples
+Batch 1 index 0 of topic "BASKETBALL"
+Src 0-1: <s> <d> </s>
+Target (statement-non-opinion) >> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and
+Sample 0 (statement-non-opinion) >> <unk> or whatever and the thing about that they were talking about how they were
+Sample 1 (acknowledge_(backchannel)) >> yeah
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> hum
+Sample 3 (statement-non-opinion) >> well we have a lot of times i guess we're talking about
+Sample 4 (statement-opinion) >> and i think that's the one of the time to do that
+
+Batch 2 index 0 of topic "BASKETBALL"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and </s>
+Target (backchannel_in_question_form) >> oh really hum
+Sample 0 (wh-question) >> all right now you are your
+Sample 1 (statement-opinion) >> is your own home - hum
+Sample 2 (agree/accept) >> it's true yeah i'm sure it's very interesting
+Sample 3 (acknowledge_(backchannel)) >> uh - huh
+Sample 4 (agree/accept) >> i think there's a new york in the middle school district
+
+Batch 3 index 0 of topic "BASKETBALL"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and </s>
+Src 2-0: <s> oh really hum </s>
+Target (statement-non-opinion) >> they were beaten by a last minute three point shot
+Sample 0 (statement-non-opinion) >> that the only thing that's the only thing i think the most of the problems is they're <unk> with a new york
+Sample 1 (statement-non-opinion) >> <unk> and you can get your own you're gonna get into
+Sample 2 (statement-opinion) >> but i think that's what the government wants to be able to be done on the phone or whatever
+Sample 3 (statement-non-opinion) >> and i think it's not that's the last year old and he was all the new york and he was
+Sample 4 (statement-non-opinion) >> you know you're you know that's what you're with <unk> and
+
+Batch 4 index 0 of topic "BASKETBALL"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and </s>
+Src 2-1: <s> oh really hum </s>
+Src 3-0: <s> they were beaten by a last minute three point shot </s>
+Target (appreciation) >> oh my gosh
+Sample 0 (abandoned_or_turn-exit/uninterpretable) >> hum
+Sample 1 (acknowledge_(backchannel)) >> hm
+Sample 2 (acknowledge_(backchannel)) >> uh - huh
+Sample 3 (acknowledge_(backchannel)) >> yeah oh yeah
+Sample 4 (yes-no-question) >> uh - huh and that kind of thing that you did
+
+Batch 5 index 0 of topic "BASKETBALL"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and </s>
+Src 2-0: <s> oh really hum </s>
+Src 3-1: <s> they were beaten by a last minute three point shot </s>
+Src 4-0: <s> oh my gosh </s>
+Target (statement-non-opinion) >> and so it kind of opened things up a little bit they play brigham young university tonight
+Sample 0 (statement-opinion) >> and a lot of things
+Sample 1 (statement-non-opinion) >> and i think the first of the people i think i was going to get out of the <unk> and they were just like the <unk> and i don't know how many people are going to
+Sample 2 (statement-opinion) >> and i'm not it's like you know it's probably more than
+Sample 3 (acknowledge_(backchannel)) >> yes uh - huh
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> and how about how to school and then she did
+
+Batch 6 index 0 of topic "BASKETBALL"
+Src 1-0: <s> as texas el paso they were <unk> until thursday night when they played the university of utah here in salt lake city and </s>
+Src 2-1: <s> oh really hum </s>
+Src 3-0: <s> they were beaten by a last minute three point shot </s>
+Src 4-1: <s> oh my gosh </s>
+Src 5-0: <s> and so it kind of opened things up a little bit they play brigham young university tonight </s>
+Target (acknowledge_(backchannel)) >> uh - huh
+Sample 0 (acknowledge_(backchannel)) >> right
+Sample 1 (acknowledge_(backchannel)) >> hm
+Sample 2 (yes-no-question) >> did you mean he did
+Sample 3 (acknowledge_(backchannel)) >> uh - huh
+Sample 4 (acknowledge_(backchannel)) >> uh - huh
+
+Avg recall BLEU 0.429134, avg precision BLEU 0.162261 and F1 0.235483 (only 1 reference response. Not final result)
+Avg recall BLEU 0.429134, avg precision BLEU 0.162261 and F1 0.235483 (only 1 reference response. Not final result)
+Done testing
+Save model!!
+>> Epoch 1 with lr 0.001000
+0.54 elbo_loss 48.067562 bow_loss 61.571690 rc_loss 39.857903 rc_peplexity 19.983337 kl_loss 24.595127 kl_w 0.368700
+0.64 elbo_loss 47.644581 bow_loss 60.618999 rc_loss 38.885612 rc_peplexity 19.066835 kl_loss 23.870697 kl_w 0.437300
+0.74 elbo_loss 46.512505 bow_loss 58.652866 rc_loss 37.347263 rc_peplexity 18.144650 kl_loss 22.970535 kl_w 0.505900
+0.84 elbo_loss 46.890087 bow_loss 58.705826 rc_loss 37.288658 rc_peplexity 17.937990 kl_loss 22.283401 kl_w 0.574500
+Epoch Done elbo_loss 47.115723 bow_loss 58.799271 rc_loss 37.353527 rc_peplexity 17.934273 kl_loss 22.050703 step time 2.0454
+Valid begins with 41 batches with 0 left over samples
+ELBO_VALID elbo_loss 60.864628 bow_loss 64.354134 rc_loss 41.154736 rc_peplexity 18.712372 kl_loss 19.709892 
+Test begins with 5481 batches with 0 left over samples
+Batch 1 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Target (statement-opinion) >> well i need to find out from you how the last
+Sample 0 (statement-opinion) >> i have a lot of it seems to be a lot of a lot of you know at least in the past ten minutes and a half ago
+Sample 1 (yes-no-question) >> what kind of camping do you have a vacuum and it's an automatic
+Sample 2 (conventional-closing) >> well thanks
+Sample 3 (statement-non-opinion) >> i have a computer e and
+Sample 4 (appreciation) >> okay
+
+Batch 2 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> well i need to find out from you how the last </s>
+Target (conventional-closing) >> remodeling project you <unk> and if it was successful and you were pleased with what happened
+Sample 0 (yes-no-question) >> we have a lot about the kids are you know we're going to have
+Sample 1 (statement-non-opinion) >> of course and
+Sample 2 (statement-opinion) >> the same thing that we have our air conditioner was
+Sample 3 (yes-no-question) >> do you think about this
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> and to think
+
+Batch 3 index 0 of topic "HOME REPAIRS"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> well i need to find out from you how the last </s>
+Src 2-0: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Target (abandoned_or_turn-exit/uninterpretable) >> well
+Sample 0 (abandoned_or_turn-exit/uninterpretable) >> well the
+Sample 1 (statement-non-opinion) >> well it's still the water
+Sample 2 (yes-no-question) >> um - hum yeah i was going to be about ten or three or three
+Sample 3 (yes_answers) >> yeah that's nice
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+
+Batch 4 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> well i need to find out from you how the last </s>
+Src 2-1: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-0: <s> well </s>
+Target (yes-no-question) >> you've been doing any remodeling lately
+Sample 0 (statement-non-opinion) >> i mean it's just all the way out and you'd get
+Sample 1 (abandoned_or_turn-exit/uninterpretable) >> and so
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> it's just a hundred or something
+Sample 3 (statement-non-opinion) >> i haven't had a chance to go down and i was pretty close to a car
+Sample 4 (statement-non-opinion) >> well the one and i said well you know and then i don't know if you have to take the car
+
+Batch 5 index 0 of topic "HOME REPAIRS"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> well i need to find out from you how the last </s>
+Src 2-0: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-1: <s> well </s>
+Src 4-0: <s> you ' ve been doing any remodeling lately </s>
+Target (statement-non-opinion) >> the only remodeling we do is we put new we put up molding and wallpaper and we put it up in <unk>'s room and in the
+Sample 0 (acknowledge_(backchannel)) >> oh
+Sample 1 (statement-opinion) >> no we have a lot of people and i mean it's just been with a house and you know with them and we had a chance to
+Sample 2 (acknowledge_(backchannel)) >> huh
+Sample 3 (acknowledge_(backchannel)) >> huh
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+
+Batch 6 index 0 of topic "HOME REPAIRS"
+Src 1-1: <s> well i need to find out from you how the last </s>
+Src 2-1: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-0: <s> well </s>
+Src 4-1: <s> you ' ve been doing any remodeling lately </s>
+Src 5-0: <s> the only remodeling we do is we put new we put up molding and wallpaper and we put it up in <unk> ' s room and in the </s>
+Target (acknowledge_(backchannel)) >> uh - huh
+Sample 0 (acknowledge_(backchannel)) >> uh - huh
+Sample 1 (statement-opinion) >> it's been nice enough to do anything
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+Sample 3 (statement-non-opinion) >> it's a big deal i'm sure in dallas
+Sample 4 (acknowledge_(backchannel)) >> right
+
+Avg recall BLEU 0.454621, avg precision BLEU 0.166408 and F1 0.243636 (only 1 reference response. Not final result)
+Avg recall BLEU 0.454621, avg precision BLEU 0.166408 and F1 0.243636 (only 1 reference response. Not final result)
+Done testing
+Save model!!
+>> Epoch 2 with lr 0.001000
+0.97 elbo_loss 49.950996 bow_loss 60.297138 rc_loss 38.196121 rc_peplexity 17.603228 kl_loss 18.536827 kl_w 0.668700
+Epoch Done elbo_loss 49.735973 bow_loss 59.913734 rc_loss 37.958893 rc_peplexity 17.507692 kl_loss 18.328051 step time 0.6596
+Valid begins with 41 batches with 0 left over samples
+ELBO_VALID elbo_loss 59.735924 bow_loss 64.045189 rc_loss 40.951187 rc_peplexity 18.451143 kl_loss 18.784739 
+Test begins with 5481 batches with 0 left over samples
+Batch 1 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Target (statement-opinion) >> well i need to find out from you how the last
+Sample 0 (statement-non-opinion) >> well i certainly certainly interesting
+Sample 1 (statement-non-opinion) >> oh yes it is
+Sample 2 (yes_answers) >> okay well let's see what i
+Sample 3 (yes-no-question) >> so you do you think that's what do you do the <unk> and
+Sample 4 (statement-non-opinion) >> right and the <unk> and
+
+Batch 2 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> well i need to find out from you how the last </s>
+Target (conventional-closing) >> remodeling project you <unk> and if it was successful and you were pleased with what happened
+Sample 0 (statement-non-opinion) >> it's a lot of it was i guess the weather in the middle of the country you know for about
+Sample 1 (statement-opinion) >> so you know i guess you know how long you have to have a good idea of how much about it and then you know when you have to put your name on it or something like that
+Sample 2 (statement-opinion) >> you know for a while and then you've got to have the same thing that's about
+Sample 3 (statement-non-opinion) >> i think it's a lot of the people in the city and i think that they have a lot of good stuff in the afternoon and then they have to be pretty much
+Sample 4 (statement-non-opinion) >> it was right i mean how to do it
+
+Batch 3 index 0 of topic "HOME REPAIRS"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> well i need to find out from you how the last </s>
+Src 2-0: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Target (abandoned_or_turn-exit/uninterpretable) >> well
+Sample 0 (acknowledge_(backchannel)) >> right
+Sample 1 (conventional-closing) >> oh how about the weather's got all the
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+Sample 3 (statement-non-opinion) >> i enjoyed it too well they're all over
+Sample 4 (acknowledge_(backchannel)) >> uh - huh
+
+Batch 4 index 0 of topic "HOME REPAIRS"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> well i need to find out from you how the last </s>
+Src 2-1: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-0: <s> well </s>
+Target (yes-no-question) >> you've been doing any remodeling lately
+Sample 0 (statement-non-opinion) >> <unk>'s house she's been all right to have her
+Sample 1 (statement-non-opinion) >> but i think we're looking at what we're looking for it for a while
+Sample 2 (wh-question) >> so i guess what i do i think you would spend about just working in the morning
+Sample 3 (statement-non-opinion) >> in fact i've never seen that i've never been out of the country that they can't afford it like a little bit of <unk> up here in the afternoon
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> and so what kind of you do
+
+Batch 5 index 0 of topic "HOME REPAIRS"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> well i need to find out from you how the last </s>
+Src 2-0: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-1: <s> well </s>
+Src 4-0: <s> you ' ve been doing any remodeling lately </s>
+Target (statement-non-opinion) >> the only remodeling we do is we put new we put up molding and wallpaper and we put it up in <unk>'s room and in the
+Sample 0 (statement-non-opinion) >> i've been in my apartment and i went to the beach and i've been in <unk>
+Sample 1 (yes-no-question) >> um - hum well and you know the <unk> and
+Sample 2 (statement-non-opinion) >> i'm i've
+Sample 3 (statement-non-opinion) >> yeah it gets all the bills
+Sample 4 (statement-non-opinion) >> well we have to live in the city we're going to get down here
+
+Batch 6 index 0 of topic "HOME REPAIRS"
+Src 1-1: <s> well i need to find out from you how the last </s>
+Src 2-1: <s> remodeling project you <unk> and if it was successful and you were pleased with what happened </s>
+Src 3-0: <s> well </s>
+Src 4-1: <s> you ' ve been doing any remodeling lately </s>
+Src 5-0: <s> the only remodeling we do is we put new we put up molding and wallpaper and we put it up in <unk> ' s room and in the </s>
+Target (acknowledge_(backchannel)) >> uh - huh
+Sample 0 (acknowledge_(backchannel)) >> uh - huh
+Sample 1 (acknowledge_(backchannel)) >> uh - huh
+Sample 2 (acknowledge_(backchannel)) >> oh you uh - huh
+Sample 3 (acknowledge_(backchannel)) >> oh yeah
+Sample 4 (acknowledge_(backchannel)) >> right
+
+Avg recall BLEU 0.440982, avg precision BLEU 0.241657 and F1 0.312219 (only 1 reference response. Not final result)
+Avg recall BLEU 0.440982, avg precision BLEU 0.241657 and F1 0.312219 (only 1 reference response. Not final result)
+Done testing
+Save model!!
+>> Epoch 3 with lr 0.001000
+Train begins with 6864 batches with 6 left over samples
+0.10 elbo_loss 45.781261 bow_loss 55.020737 rc_loss 33.352966 rc_peplexity 14.314587 kl_loss 17.257322 kl_w 0.754900
+0.20 elbo_loss 47.575329 bow_loss 56.729900 rc_loss 34.917599 rc_peplexity 15.340148 kl_loss 16.801430 kl_w 0.823500
+0.30 elbo_loss 48.122009 bow_loss 57.298218 rc_loss 35.401672 rc_peplexity 15.566051 kl_loss 16.195473 kl_w 0.892100
+0.40 elbo_loss 47.836246 bow_loss 56.705276 rc_loss 35.113396 rc_peplexity 15.661367 kl_loss 15.584894 kl_w 0.960700
+Epoch Done elbo_loss 48.223015 bow_loss 57.129501 rc_loss 35.470123 rc_peplexity 15.889713 kl_loss 15.401133 step time 2.2949
+Valid begins with 41 batches with 0 left over samples
+ELBO_VALID elbo_loss 55.947517 bow_loss 64.585571 rc_loss 42.210155 rc_peplexity 20.175987 kl_loss 13.737354 
+Test begins with 5481 batches with 0 left over samples
+Batch 1 index 0 of topic "WOMEN'S ROLES"
+Src 0-1: <s> <d> </s>
+Target (open-question) >> okay what do you think about it
+Sample 0 (statement-non-opinion) >> and i think it was like a lot of the people that are at the same time they're at the point of the country and it was like a
+Sample 1 (statement-opinion) >> well i guess in europe are very active
+Sample 2 (statement-non-opinion) >> i guess it was nice to have to wear and i guess i could say well i was in my mother and she could go in and find out that day care
+Sample 3 (statement-non-opinion) >> i don't think i've ever thought about a lot of our life but i guess our family is a teenager and i
+Sample 4 (statement-non-opinion) >> oh well the
+
+Batch 2 index 0 of topic "WOMEN'S ROLES"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> okay what do you think about it </s>
+Target (statement-opinion) >> well the roles have definitely changed in the last generation or so
+Sample 0 (statement-non-opinion) >> and i've noticed that i don't know i don't know i've got a few kids and so many kids and they're so busy
+Sample 1 (statement-non-opinion) >> and i think it's a it's a deterrent to it and i think it is the next year and it is you know by the time they're going to be ten years old and
+Sample 2 (statement-non-opinion) >> well i don't know if you're going to get a little bit more aggressive and then i got older than the old age or two years old and
+Sample 3 (abandoned_or_turn-exit/uninterpretable) >> yeah
+Sample 4 (yes-no-question) >> i really do i want to go to work for this
+
+Batch 3 index 0 of topic "WOMEN'S ROLES"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> okay what do you think about it </s>
+Src 2-0: <s> well the roles have definitely changed in the last generation or so </s>
+Target (agree/accept) >> oh yeah
+Sample 0 (statement-non-opinion) >> that's probably the only thing to be too is too
+Sample 1 (statement-opinion) >> yeah they've got two years
+Sample 2 (acknowledge_(backchannel)) >> uh - huh
+Sample 3 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+Sample 4 (yes_answers) >> yeah well i think that's true i guess they're all right well i guess they're talking about it
+
+Batch 4 index 0 of topic "WOMEN'S ROLES"
+Src 0-0: <s> <d> </s>
+Src 1-0: <s> okay what do you think about it </s>
+Src 2-1: <s> well the roles have definitely changed in the last generation or so </s>
+Src 3-0: <s> oh yeah </s>
+Target (statement-opinion) >> i think a lot of it has to do with women working
+Sample 0 (statement-non-opinion) >> but i've been in a situation where i've been in a situation where i've been lucky enough to get a good school there's a long time i don't know if you
+Sample 1 (statement-opinion) >> that's right and they just think that they have to do that but not the person that we have
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> and
+Sample 3 (statement-non-opinion) >> i mean i'm talking about it but i'm
+Sample 4 (statement-non-opinion) >> oh well they're just too old and
+
+Batch 5 index 0 of topic "WOMEN'S ROLES"
+Src 0-1: <s> <d> </s>
+Src 1-1: <s> okay what do you think about it </s>
+Src 2-0: <s> well the roles have definitely changed in the last generation or so </s>
+Src 3-1: <s> oh yeah </s>
+Src 4-0: <s> i think a lot of it has to do with women working </s>
+Target (statement-opinion) >> uh - huh yeah i do too i think it's going to in like in the future i think all women are going to work i mean they may let you off for a day or
+Sample 0 (appreciation) >> i guess
+Sample 1 (acknowledge_(backchannel)) >> yeah
+Sample 2 (acknowledge_(backchannel)) >> uh - huh
+^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[B^[[D^[[D^[[D
+Sample 4 (abandoned_or_turn-exit/uninterpretable) >> um - hum
+
+Batch 6 index 0 of topic "WOMEN'S ROLES"
+Src 1-0: <s> okay what do you think about it </s>
+Src 2-1: <s> well the roles have definitely changed in the last generation or so </s>
+Src 3-0: <s> oh yeah </s>
+Src 4-1: <s> i think a lot of it has to do with women working </s>
+Src 5-0: <s> uh - huh yeah i do too i think it ' s going to in like in the future i think all women are going to work i mean they may let you off for a day or </s>
+Target (acknowledge_(backchannel)) >> yeah
+Sample 0 (acknowledge_(backchannel)) >> yeah um - hum yeah
+Sample 1 (acknowledge_(backchannel)) >> okay
+Sample 2 (abandoned_or_turn-exit/uninterpretable) >> i mean i'm not going to
+Sample 3 (acknowledge_(backchannel)) >> yeah
+Sample 4 (agree/accept) >> yeah
+
+Avg recall BLEU 0.295110, avg precision BLEU 0.138455 and F1 0.188482 (only 1 reference response. Not final result)
+Avg recall BLEU 0.295110, avg precision BLEU 0.138455 and F1 0.188482 (only 1 reference response. Not final result)
+Done testing
+Save model!!
+>> Epoch 4 with lr 0.001000
+0.54 elbo_loss 52.938213 bow_loss 62.532970 rc_loss 40.070965 rc_peplexity 18.632547 kl_loss 12.885990 kl_w 1.000000
+0.64 elbo_loss 52.671543 bow_loss 62.210915 rc_loss 39.838043 rc_peplexity 18.680099 kl_loss 12.842871 kl_w 1.000000
